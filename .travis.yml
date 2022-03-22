@@ -13,5 +13,5 @@ services:
 before_install:
   - docker build -t testimage .
 script:
-  - docker run -ti -name testcontainer testimage /bin/bash
+  - docker run -ti --rm --name=testcontainer testimage /bin/bash
   - export
