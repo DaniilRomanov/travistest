@@ -1,5 +1,5 @@
 FROM quay.io/centos/centos:stream9
-RG CIRCLECI_TOOLS="git openssh-clients tar gzip ca-certificates glibc-locale-source glibc-langpack-en"
+ARG CIRCLECI_TOOLS="git openssh-clients tar gzip ca-certificates glibc-locale-source glibc-langpack-en"
 # set localtime to UTC and install basic build tools
 RUN (ln -s /usr/share/zoneinfo/UTC /etc/localtime 2> /dev/null || true) \
     && dnf update -y \
