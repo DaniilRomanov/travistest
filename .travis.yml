@@ -1,5 +1,5 @@
 os: linux
-dist: focal
+#dist: focal
 arch:
 #  - ppc64le
   - s390x
@@ -10,8 +10,12 @@ language:
 #    - SHELL=/bin/sh
 services:
   - docker
-before_install:
-  - docker build -t testimage .
+before_install: 
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=s390x] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+- docker build -t testimage .
 script:
   - docker run -ti --rm --name=testcontainer testimage /bin/bash
   - export
