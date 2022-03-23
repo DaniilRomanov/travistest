@@ -1,5 +1,8 @@
 os: linux
-#dist: focal
+dist: 
+  - xenial
+  - bionic
+  - focal
 arch:
 #  - ppc64le
   - s390x
@@ -21,5 +24,7 @@ before_install:
   - docker -v
   - docker build -t testimage .
 script:
-  - docker run -ti --rm --name=testcontainer testimage /bin/bash
+  - docker run -i --rm --name=testcontainer testimage /bin/bash
   - export
+  - /bin/bash --version
+  - /bin/sh --version
