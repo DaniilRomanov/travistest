@@ -1,7 +1,5 @@
 os: linux
 dist: 
-#  - xenial
-#  - bionic
   - focal
 arch:
 #  - ppc64le
@@ -11,14 +9,12 @@ language:
 services:
   - docker
 before_install: 
-  - docker -v
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   - sudo apt-get update
-  - sudo apt-get install docker-ce containerd.io
+  - sudo apt-get install docker-ce
   - docker build -t testimage .
 script:
   - docker run -ti --rm --name=testcontainer testimage /bin/bash
   - export
   - /bin/bash --version
-  - /bin/sh --version
