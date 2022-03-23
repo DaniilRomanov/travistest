@@ -15,6 +15,4 @@ before_install:
   - sudo apt-get install docker-ce
   - docker build -t testimage .
 script:
-  - docker run -ti --rm --name=testcontainer testimage /bin/bash
-  - export
-  - /bin/bash --version
+  - docker run -i --rm --name=testcontainer testimage /bin/bash -c "export && /bin/bash --version"
