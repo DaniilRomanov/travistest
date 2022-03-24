@@ -1,11 +1,7 @@
 os: linux
-jobs:
-  include:
-    - dist: xenial
-    - dist: bionic
-    - dist: focal
+dist: focal
 arch:
-#  - ppc64le
+  - ppc64le
   - s390x
 language: 
   - shell
