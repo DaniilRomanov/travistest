@@ -17,7 +17,10 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install docker-ce
 install:
-  - sudo systemctl enable docker
+#  - sudo systemctl enable docker
+  - docker --version
+  - docker images
+  - docker ps
   - docker build -t testimage .
 script:
   - docker run -i --rm --name=testcontainer testimage /bin/bash -c "export && /bin/bash --version"
