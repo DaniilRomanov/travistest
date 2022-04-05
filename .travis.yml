@@ -21,52 +21,51 @@ _use_newer_docker: &use_newer_docker
 language: shell
 jobs:
 - include:
-  - os: linux
+  - name: "xenial-p-stock"
     arch: ppc64le
     dist: xenial
     <<: *use_stock_docker
-  - os: linux
+  - name: "xenial-p-newer"
     arch: ppc64le
     dist: xenial
     <<: *use_newer_docker
-  - os: linux
+  - name: "bionic-p-stock"
     arch: ppc64le
     dist: bionic
     <<: *use_stock_docker
-  - os: linux
+  - name: "bionic-p-newer"
     arch: ppc64le
     dist: bionic
     <<: *use_newer_docker
-  - os: linux
+  - name: "focal-p-stock"
     arch: ppc64le
     dist: focal
     <<: *use_stock_docker
-  - os: linux
+  - name: "focal-p-newer"
     arch: ppc64le
     dist: focal
     <<: *use_newer_docker
-- include:
-  - os: linux
+  - name: "xenial-z-stock"
     arch: s390x
     dist: xenial
     <<: *use_stock_docker
-  - os: linux
+  - name: "xenial-z-newer"
     arch: s390x
     dist: xenial
     <<: *use_newer_docker
-  - os: linux
+  - name: "bionic-z-stock"
     arch: s390x
     dist: bionic
     <<: *use_stock_docker
-  - os: linux
+  - name: "bionic-z-newer"
     arch: s390x
     dist: bionic
     <<: *use_newer_docker
-  - os: linux
+  - name: "focal-z-stock"
     arch: s390x
     dist: focal
     <<: *use_stock_docker
-  - os: linux
+  - name: "focal-z-newer"
     arch: s390x
     dist: focal
     <<: *use_newer_docker
