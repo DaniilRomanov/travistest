@@ -4,23 +4,34 @@ arch:
   - s390x
 language: 
   - shell
-matrix:
-  include:
-    - dist: xenial
-    - dist: bionic
-    - dist: focal
+stages:
+  - before_install
+  - install
+  - script
+
+dist:
+  - xenial
+  - bionic
+  - focal
 jobs:
+  include:
   - name: "Stock Docker"
     services:
     - docker
-    before_install:
-    - true
+    stage:
+    - install
+    - script
   - name: "Fresh Docker"
-    before_install: 
-    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    - sudo apt-get update
-    - sudo apt-get install docker-ce
+    stage:
+    - before_install
+    - install
+    - script
+
+before_install: 
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - sudo apt-get update
+  - sudo apt-get install docker-ce
 install:
   - docker build -t testimage .
 script:
