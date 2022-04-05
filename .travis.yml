@@ -9,7 +9,6 @@ arch:
 language: 
   - shell
 jobs:
-  include:
   - name: "Stock Docker"
     services:
     - docker
