@@ -1,17 +1,20 @@
 os: linux
-dist:
-  - xenial
-  - bionic
-  - focal
 arch:
   - ppc64le
   - s390x
 language: 
   - shell
+matrix:
+  include:
+    - dist: xenial
+    - dist: bionic
+    - dist: focal
 jobs:
   - name: "Stock Docker"
     services:
     - docker
+    before_install:
+    - true
   - name: "Fresh Docker"
     before_install: 
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
