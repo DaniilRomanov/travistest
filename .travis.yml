@@ -1,35 +1,21 @@
 os: linux
-__use_stock_docker: &__use_stock_docker
-  stage: script
-  language: shell
-    services:
-    - docker
-    script:
+jobs:
+- include:
+  - script:
     - docker build -t testimage .
     - docker run -i --rm --name=testcontainer testimage /bin/bash -c "export && /bin/bash --version"
-
-__use_fresh_docker: &__use_fresh_docker
-  language: shell
-    script:
+  - script:
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     - sudo apt-get update
     - sudo apt-get install docker-ce
     - docker build -t testimage .
     - docker run -i --rm --name=testcontainer testimage /bin/bash -c "export && /bin/bash --version"
-
-jobs:
-- include:
-  - stage:
-    - <<: *__use_stock_docker
-    - <<: *__use_fresh_docker
-  - arch:
-    - ppc64le
-    - s390x
-  - dist:
-    - xenial
-    - bionic
-    - focal
+  - arch: ppc64le
+  - arch: s390x
+  - dist: xenial
+  - dist: bionic
+  - dist: focal
 
 #before_install: 
 #  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
