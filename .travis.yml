@@ -18,9 +18,11 @@ __use_fresh_docker: &__use_fresh_docker
     - docker build -t testimage .
     - docker run -i --rm --name=testcontainer testimage /bin/bash -c "export && /bin/bash --version"
 
-matrix:
-  - <<: *__use_stock_docker
-  - <<: *__use_fresh_docker
+jobs:
+- include:
+  - stage:
+    - <<: *__use_stock_docker
+    - <<: *__use_fresh_docker
   - arch:
     - ppc64le
     - s390x
