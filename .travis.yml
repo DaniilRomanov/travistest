@@ -1,4 +1,8 @@
 os: linux
+arch:
+- ppc64le
+- s390x
+language: shell
 jobs:
 - include:
   - script:
